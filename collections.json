@@ -276,6 +276,12 @@
     "slug": "boldinals"
   },
   {
+    "name": "BTC Slugs",
+    "type": "gallery",
+    "id": "6bf6558f5ee94454fb66a54392e51f471e4f98865b3df3abc194d1e1e206b59fi0",
+    "slug": "btc-slugs"
+  },
+  {
     "name": "BTC Substance by MDV",
     "type": "parent",
     "ids": [
@@ -680,6 +686,12 @@
       "7e23c182783f2fcab0437b62c56fcfdcb440a29b84645ee22b11a98e05b12c5ai0"
     ],
     "slug": "manufactured-by-lemonhaze"
+  },
+  {
+    "name": "MaxiTurdles",
+    "type": "gallery",
+    "id": "67448fb899d207b44cc457576f98f7a1dcafde092b6cb73ca74c096a496272edi0",
+    "slug": "maxiturdles"
   },
   {
     "name": "Memento Mori by Richard Nadler",
