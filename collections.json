@@ -1,13 +1,5 @@
 [
   {
-    "name": "(AI) Alkane Imperium",
-    "type": "parent",
-    "ids": [
-      "5e5f4bb0f3d63719edd08e2c2ec84431963107fc0f05f18f89f27ddcf3b47966i0"
-    ],
-    "slug": "alkaneimperium"
-  },
-  {
     "name": "$DOG | Ordinals - SZN I Genesis",
     "type": "parent",
     "ids": [
@@ -41,12 +33,12 @@
     "slug": "relics-protocol"
   },
   {
-    "name": "0N1 Force: The Fallen",
+    "name": "(AI) Alkane Imperium",
     "type": "parent",
     "ids": [
-      "7d43ec1554e5a6f4e3005a3818ee82ed8a49b879364be7b6349aae97e5aa641ai1"
+      "5e5f4bb0f3d63719edd08e2c2ec84431963107fc0f05f18f89f27ddcf3b47966i0"
     ],
-    "slug": "on1force_the_f4llen"
+    "slug": "alkaneimperium"
   },
   {
     "name": "0N1 FORCE: Void Drives",
@@ -55,6 +47,14 @@
       "8a8b3aaa1cbcbf4af7ae4659a0c721b85ae384bb9f713b2d259a119cab5ff4a2i0"
     ],
     "slug": "on1force_void_drives"
+  },
+  {
+    "name": "0N1 Force: The Fallen",
+    "type": "parent",
+    "ids": [
+      "7d43ec1554e5a6f4e3005a3818ee82ed8a49b879364be7b6349aae97e5aa641ai1"
+    ],
+    "slug": "on1force_the_f4llen"
   },
   {
     "name": "1337 Zeros",
@@ -81,20 +81,36 @@
     "slug": "a_solemn_rose"
   },
   {
-    "name": "Aeons",
-    "type": "parent",
-    "ids": [
-      "54f6eda5d9d4adf71f244ca8e0c6199223b2f20f9cf02902825e66b6d92a8bc8i0"
-    ],
-    "slug": "aeonsbtc"
-  },
-  {
     "name": "AILU",
     "type": "parent",
     "ids": [
       "a3fb1b9aa4fd072cdc3616224c46276b064ac84d554dd750c92e53bd920a6969i0"
     ],
     "slug": "ailu"
+  },
+  {
+    "name": "APOSTLES",
+    "type": "parent",
+    "ids": [
+      "ad2fd169a4ef938060f20881722e97379e289e42383c025291869d946f8de3d1i0"
+    ],
+    "slug": "apostles"
+  },
+  {
+    "name": "ARCANE",
+    "type": "parent",
+    "ids": [
+      "c30d23c368bf6b44ce4985a5f75c6b86f6e8df363de52762089a51dadfcf05c6i0"
+    ],
+    "slug": "arcane"
+  },
+  {
+    "name": "Aeons",
+    "type": "parent",
+    "ids": [
+      "54f6eda5d9d4adf71f244ca8e0c6199223b2f20f9cf02902825e66b6d92a8bc8i0"
+    ],
+    "slug": "aeonsbtc"
   },
   {
     "name": "Airhead",
@@ -121,22 +137,6 @@
     "slug": "aliens-of-fairness"
   },
   {
-    "name": "APOSTLES",
-    "type": "parent",
-    "ids": [
-      "ad2fd169a4ef938060f20881722e97379e289e42383c025291869d946f8de3d1i0"
-    ],
-    "slug": "apostles"
-  },
-  {
-    "name": "ARCANE",
-    "type": "parent",
-    "ids": [
-      "c30d23c368bf6b44ce4985a5f75c6b86f6e8df363de52762089a51dadfcf05c6i0"
-    ],
-    "slug": "arcane"
-  },
-  {
     "name": "Arrangements",
     "type": "parent",
     "ids": [
@@ -161,6 +161,36 @@
     "slug": "atlas-by-harto"
   },
   {
+    "name": "BEST BEFORE by Lemonhaze x ORDINALLY",
+    "type": "parent",
+    "ids": [
+      "bcf16735647186ef853dedd820c9319e9895f99bfddedcfb782ace38093bb8fbi0"
+    ],
+    "slug": "best-before-by-lemonhaze-x-ordinally"
+  },
+  {
+    "name": "BLiX MEMBERS ONLY CLUB",
+    "type": "parent",
+    "ids": [
+      "b7be5d987f6bbe76c57631b860234a6def9d17355c716cbc6486aef74aac18cei0"
+    ],
+    "slug": "bmoc"
+  },
+  {
+    "name": "BTC Slugs",
+    "type": "gallery",
+    "id": "6bf6558f5ee94454fb66a54392e51f471e4f98865b3df3abc194d1e1e206b59fi0",
+    "slug": "btc-slugs"
+  },
+  {
+    "name": "BTC Substance by MDV",
+    "type": "parent",
+    "ids": [
+      "0e0687608a554dc0c71aa27d04630c1e5df9e40b940d94c6e700cf8cbe7a11fbi0"
+    ],
+    "slug": "btc_substance"
+  },
+  {
     "name": "Be Right Back",
     "type": "parent",
     "ids": [
@@ -178,28 +208,12 @@
     "slug": "behold"
   },
   {
-    "name": "BEST BEFORE by Lemonhaze x ORDINALLY",
-    "type": "parent",
-    "ids": [
-      "bcf16735647186ef853dedd820c9319e9895f99bfddedcfb782ace38093bb8fbi0"
-    ],
-    "slug": "best-before-by-lemonhaze-x-ordinally"
-  },
-  {
     "name": "BitBoy One Genesis",
     "type": "parent",
     "ids": [
       "8122cbbe09e5142049105881a40bcf1643e4a74e04158a5643aad54ab5d1aec1i0"
     ],
     "slug": "bitboy_one_genesis"
-  },
-  {
-    "name": "Bitdream by Howie Lab",
-    "type": "parent",
-    "ids": [
-      "d2034a90f5a89b2547349a93e54f6489233dc62a34734bde228be3963eb000b4i0"
-    ],
-    "slug": "bitdream"
   },
   {
     "name": "BitMON",
@@ -210,20 +224,26 @@
     "slug": "bitmon"
   },
   {
+    "name": "Bitcoin Frogs",
+    "type": "gallery",
+    "id": "659e684ff344c7d7be30bf608e214dcad96596589ddc738bd72e2fed6faf5a62i0",
+    "slug": "bitcoin-frogs"
+  },
+  {
+    "name": "Bitdream by Howie Lab",
+    "type": "parent",
+    "ids": [
+      "d2034a90f5a89b2547349a93e54f6489233dc62a34734bde228be3963eb000b4i0"
+    ],
+    "slug": "bitdream"
+  },
+  {
     "name": "Black Doges",
     "type": "parent",
     "ids": [
       "04f2df6f44a2ca5eef4baae0cca10022e43b74094b276dcc3e65b84bab037621i0"
     ],
     "slug": "black-doges"
-  },
-  {
-    "name": "BLiX MEMBERS ONLY CLUB",
-    "type": "parent",
-    "ids": [
-      "b7be5d987f6bbe76c57631b860234a6def9d17355c716cbc6486aef74aac18cei0"
-    ],
-    "slug": "bmoc"
   },
   {
     "name": "Blob",
@@ -268,28 +288,6 @@
     "slug": "blokchain-surveillance"
   },
   {
-    "name": "boldinals",
-    "type": "parent",
-    "ids": [
-      "bc5f7ea515822472d6da34d6986e1d1fecd0df865098de79e33d913ab743eb7di0"
-    ],
-    "slug": "boldinals"
-  },
-  {
-    "name": "BTC Slugs",
-    "type": "gallery",
-    "id": "6bf6558f5ee94454fb66a54392e51f471e4f98865b3df3abc194d1e1e206b59fi0",
-    "slug": "btc-slugs"
-  },
-  {
-    "name": "BTC Substance by MDV",
-    "type": "parent",
-    "ids": [
-      "0e0687608a554dc0c71aa27d04630c1e5df9e40b940d94c6e700cf8cbe7a11fbi0"
-    ],
-    "slug": "btc_substance"
-  },
-  {
     "name": "C.O.C.K.S",
     "type": "parent",
     "ids": [
@@ -302,14 +300,6 @@
     "type": "gallery",
     "id": "c871da405f1e0b955d135e789da88fe5a2c5d15c15d485235c7f10a05a827f71i0",
     "slug": "cents"
-  },
-  {
-    "name": "chatFUKR",
-    "type": "parent",
-    "ids": [
-      "d1834ae8b0c5879f3644855e84650705cccb906b7b662e0dcf49b78286cc08f0i0"
-    ],
-    "slug": "chatfukr"
   },
   {
     "name": "Code of Culture by Orkhan",
@@ -334,22 +324,6 @@
     "slug": "cursed-fomojis"
   },
   {
-    "name": "Dead Doges",
-    "type": "parent",
-    "ids": [
-      "dead5f33f9a0df9dae9ce33bc2dd035069302d35b85189a7ef7cf538543bc648i0"
-    ],
-    "slug": "dead-doges"
-  },
-  {
-    "name": "Dead Pepes",
-    "type": "parent",
-    "ids": [
-      "dead3f9423f306fb18ce922d9fca4627e0fad8618115897694412ecf16ab35c3i0"
-    ],
-    "slug": "deadpepes"
-  },
-  {
     "name": "DEADMONKS",
     "type": "parent",
     "ids": [
@@ -366,18 +340,34 @@
     "slug": "derp"
   },
   {
+    "name": "DMT-VESSELS by MDV",
+    "type": "gallery",
+    "id": "4b8955de318f58787cc3149cc8098d6c7a307b4c48573b57258db21219b16623i0",
+    "slug": "dmt_vessels"
+  },
+  {
+    "name": "Dead Doges",
+    "type": "parent",
+    "ids": [
+      "dead5f33f9a0df9dae9ce33bc2dd035069302d35b85189a7ef7cf538543bc648i0"
+    ],
+    "slug": "dead-doges"
+  },
+  {
+    "name": "Dead Pepes",
+    "type": "parent",
+    "ids": [
+      "dead3f9423f306fb18ce922d9fca4627e0fad8618115897694412ecf16ab35c3i0"
+    ],
+    "slug": "deadpepes"
+  },
+  {
     "name": "Deus Ex Machina by CyberSea X Vivid Gallery",
     "type": "parent",
     "ids": [
       "3f4be9cef6c8fb13f88980c909bd76175dbd3b381c449a7493dc901b14933afbi0"
     ],
     "slug": "deus-ex-machina-by-cybersea"
-  },
-  {
-    "name": "DMT-VESSELS by MDV",
-    "type": "gallery",
-    "id": "4b8955de318f58787cc3149cc8098d6c7a307b4c48573b57258db21219b16623i0",
-    "slug": "dmt_vessels"
   },
   {
     "name": "Doom by Glitch Studio",
@@ -396,6 +386,14 @@
     "slug": "ducksonchain"
   },
   {
+    "name": "ENTROPY by Nullish",
+    "type": "parent",
+    "ids": [
+      "5f009be725a5afa1b921e2cc5617461ebf8ecba96f2f85134c6ca9bc2878a12fi0"
+    ],
+    "slug": "entropy"
+  },
+  {
     "name": "EdgeFold by RalenArc",
     "type": "parent",
     "ids": [
@@ -404,20 +402,12 @@
     "slug": "edgefold"
   },
   {
-    "name": "Enigma by CyberSea x Vivid Gallery x OnChainMonkey®",
+    "name": "Enigma by CyberSea x Vivid Gallery x OnChainMonkey\u00ae",
     "type": "parent",
     "ids": [
       "c47709059353c8943fb3fd03be69c207e79e5d8f458f661945d92f4b6238e267i0"
     ],
     "slug": "enigma-by-cybersea"
-  },
-  {
-    "name": "ENTROPY by Nullish",
-    "type": "parent",
-    "ids": [
-      "5f009be725a5afa1b921e2cc5617461ebf8ecba96f2f85134c6ca9bc2878a12fi0"
-    ],
-    "slug": "entropy"
   },
   {
     "name": "ExO Recruits",
@@ -452,6 +442,14 @@
     "slug": "flares"
   },
   {
+    "name": "FUD",
+    "type": "parent",
+    "ids": [
+      "ea60efe376e89e6ab3e49c4c5de4cb36bfa27a5cba9fff46a69ff7c5edfad139i0"
+    ],
+    "slug": "fudonbtc"
+  },
+  {
     "name": "FloraForms by Harto X Belvedere",
     "type": "parent",
     "ids": [
@@ -480,14 +478,6 @@
       "84dcdfe35eb3643ccba9b651c983f856612c2b71e5b84c807fe05942df442260i0"
     ],
     "slug": "frontline"
-  },
-  {
-    "name": "FUD",
-    "type": "parent",
-    "ids": [
-      "ea60efe376e89e6ab3e49c4c5de4cb36bfa27a5cba9fff46a69ff7c5edfad139i0"
-    ],
-    "slug": "fudonbtc"
   },
   {
     "name": "Fukuhedrons",
@@ -576,14 +566,6 @@
     "slug": "idiots"
   },
   {
-    "name": "Inflatables: Arrival by Shaderism x Vivid Gallery",
-    "type": "parent",
-    "ids": [
-      "5e3cdb7dee382b9bf3b76b31183bd88ca1f80c18e9f7789594db7dd11116d406i0"
-    ],
-    "slug": "inflatables-arrival-by-shaderism"
-  },
-  {
     "name": "INK",
     "type": "parent",
     "ids": [
@@ -598,6 +580,14 @@
       "24e40ad3deb6edff565eb16530297b8cd5f8a3e0578e5fade872269c6e86e31fi0"
     ],
     "slug": "irobyogbe"
+  },
+  {
+    "name": "Inflatables: Arrival by Shaderism x Vivid Gallery",
+    "type": "parent",
+    "ids": [
+      "5e3cdb7dee382b9bf3b76b31183bd88ca1f80c18e9f7789594db7dd11116d406i0"
+    ],
+    "slug": "inflatables-arrival-by-shaderism"
   },
   {
     "name": "Jalkas By Wira",
@@ -742,14 +732,6 @@
     "slug": "my-brain-on-chain-by-doct"
   },
   {
-    "name": "n0 0rdinary kind",
-    "type": "parent",
-    "ids": [
-      "2f4b5b57dfb6ebb9a0174b1b7a53e33eab29198a6febbd7c34136508dedccaf5i0"
-    ],
-    "slug": "n0k"
-  },
-  {
     "name": "Nakamoto Archives",
     "type": "gallery",
     "id": "83683a0a2e91beb6d37953df5a768028b987d5006fab1237931f6e30b344aebci0",
@@ -788,13 +770,7 @@
     "slug": "notsaints"
   },
   {
-    "name": "Occulum",
-    "type": "gallery",
-    "id": "b586c980914b1c69f981faa85a9b889b03270bb3f83b96658850bcc92ebfe119i0",
-    "slug": "occulum"
-  },
-  {
-    "name": "OCM Dimensions 300 by OnChainMonkey®",
+    "name": "OCM Dimensions 300 by OnChainMonkey\u00ae",
     "type": "parent",
     "ids": [
       "2dbdf9ebbec6be793fd16ae9b797c7cf968ab2427166aaf390b90b71778266abi0"
@@ -802,7 +778,7 @@
     "slug": "ocm-dimensions"
   },
   {
-    "name": "OCM Genesis by OnChainMonkey®",
+    "name": "OCM Genesis by OnChainMonkey\u00ae",
     "type": "parent",
     "ids": [
       "fb162a46943e5d7d31d72ee2c8c850e66c1ca5d0d453068aa63883528285ed21i0",
@@ -811,7 +787,7 @@
     "slug": "ocm-genesis"
   },
   {
-    "name": "OCM Katoshi Classic by OnChainMonkey®",
+    "name": "OCM Katoshi Classic by OnChainMonkey\u00ae",
     "type": "parent",
     "ids": [
       "297c86f6d25866c4d43355347c25cc36a2843f09d9dc4020ddf4725c05226e10i1"
@@ -819,7 +795,7 @@
     "slug": "katoshi-classic"
   },
   {
-    "name": "OCM Katoshi Prime by OnChainMonkey®",
+    "name": "OCM Katoshi Prime by OnChainMonkey\u00ae",
     "type": "parent",
     "ids": [
       "10858dda62f466db07ba54e6ed2e29768ebff6ddb86f91c21bf8d0970d65f4d4i0"
@@ -843,10 +819,30 @@
     "slug": "ogpebbles"
   },
   {
+    "name": "ORPEPES 5000",
+    "type": "parent",
+    "ids": [
+      "b0aaf987aaa594a993561de2277f2356b4fae5a8b84335db63e3639964607651i0"
+    ],
+    "slug": "orpepes-5000"
+  },
+  {
+    "name": "Occulum",
+    "type": "gallery",
+    "id": "b586c980914b1c69f981faa85a9b889b03270bb3f83b96658850bcc92ebfe119i0",
+    "slug": "occulum"
+  },
+  {
     "name": "Orange Haze",
     "type": "gallery",
     "id": "d3e398bc0163028cdff538eb4ef84405d7584ffd8fd8223e51ab6d65e1e6e30ci0",
     "slug": "orangehaze"
+  },
+  {
+    "name": "OrdRain",
+    "type": "gallery",
+    "id": "a8e3b4baf55a1236459f7f05f25154b9eb2e98d8b9e0e154d4108309a96f8af6i0",
+    "slug": "ordrain"
   },
   {
     "name": "Ordenza",
@@ -877,28 +873,6 @@
       "8e22dc4497c3361f8c573521e52040c46d8dedb6d0be879478d6bc6d69a614c2i0"
     ],
     "slug": "ordinalsigmax"
-  },
-  {
-    "name": "OrdRain",
-    "type": "gallery",
-    "id": "a8e3b4baf55a1236459f7f05f25154b9eb2e98d8b9e0e154d4108309a96f8af6i0",
-    "slug": "ordrain"
-  },
-  {
-    "name": "ordtism",
-    "type": "parent",
-    "ids": [
-      "a820bc531524a7fac1cdbce3d909a5312b9e51ab390adbd315d14337029fd422i0"
-    ],
-    "slug": "tism"
-  },
-  {
-    "name": "ORPEPES 5000",
-    "type": "parent",
-    "ids": [
-      "b0aaf987aaa594a993561de2277f2356b4fae5a8b84335db63e3639964607651i0"
-    ],
-    "slug": "orpepes-5000"
   },
   {
     "name": "Oscillations by MDV",
@@ -977,14 +951,6 @@
     "slug": "punksonbitcoin"
   },
   {
-    "name": "Quantum Cats",
-    "type": "parent",
-    "ids": [
-      "0e383b8af3e7f8767bc9ec0a48fbf837d82b0d537f4dbc7a8853e6828112ea41i0"
-    ],
-    "slug": "quantum_cats"
-  },
-  {
     "name": "QUEENS by FAR",
     "type": "parent",
     "ids": [
@@ -993,12 +959,12 @@
     "slug": "queens"
   },
   {
-    "name": "Radbro Satoshis Vision",
+    "name": "Quantum Cats",
     "type": "parent",
     "ids": [
-      "37c9b15a9a7d0fa7ce3ff47c740f38ebfb1a3cab2b5b91e49807baaad2d3feebi0"
+      "0e383b8af3e7f8767bc9ec0a48fbf837d82b0d537f4dbc7a8853e6828112ea41i0"
     ],
-    "slug": "bitcoin-radbros"
+    "slug": "quantum_cats"
   },
   {
     "name": "REALITY.EXE",
@@ -1007,6 +973,14 @@
       "3e336a4c7376df89a37c3c218a4eeec6e05fd47e14cc84c7e1db97b552e89622i0"
     ],
     "slug": "reality_exe"
+  },
+  {
+    "name": "Radbro Satoshis Vision",
+    "type": "parent",
+    "ids": [
+      "37c9b15a9a7d0fa7ce3ff47c740f38ebfb1a3cab2b5b91e49807baaad2d3feebi0"
+    ],
+    "slug": "bitcoin-radbros"
   },
   {
     "name": "Recursions by Billy Restey",
@@ -1063,6 +1037,14 @@
       "764efc1c3ddcf999f2099ee5a0e7a234b75128c78181b5f0adc8f5f40260a7eci0"
     ],
     "slug": "runevo"
+  },
+  {
+    "name": "STEPEPES by LORS",
+    "type": "parent",
+    "ids": [
+      "33d691762b8ec146c9d019eadf6a1736aab9e402457e502c8fc453c728450af7i0"
+    ],
+    "slug": "stepepes"
   },
   {
     "name": "Satoshi X PFP",
@@ -1135,14 +1117,6 @@
     "slug": "skullx_artist_series"
   },
   {
-    "name": "skulz",
-    "type": "parent",
-    "ids": [
-      "dead91aa984e00236983a40dc63c8f356a23a95ff5fd17b58beeb157c4e47666i0"
-    ],
-    "slug": "skulz"
-  },
-  {
     "name": "Skulz Chaos Guild",
     "type": "parent",
     "ids": [
@@ -1157,22 +1131,6 @@
       "b34edcf29a36f5078830a5695acf8f255348e46ba070ad0dceb43e0a7afa0ea3i0"
     ],
     "slug": "sparks"
-  },
-  {
-    "name": "STEPEPES by LORS",
-    "type": "parent",
-    "ids": [
-      "33d691762b8ec146c9d019eadf6a1736aab9e402457e502c8fc453c728450af7i0"
-    ],
-    "slug": "stepepes"
-  },
-  {
-    "name": "swarm_",
-    "type": "parent",
-    "ids": [
-      "0a2d171764a05531f54d2a465b8184a8c39ddbc9a7ea2e42d220e4746045ec1ei0"
-    ],
-    "slug": "swarm"
   },
   {
     "name": "Taproot Punks",
@@ -1307,14 +1265,6 @@
     "slug": "trump-bitcoin-trading-cards"
   },
   {
-    "name": "u-WWWave",
-    "type": "parent",
-    "ids": [
-      "b8221a2d96a93924ad494435598b080609f1735431aa7ce0348f3e7e6a7624dfi0"
-    ],
-    "slug": "u-wwwwave"
-  },
-  {
     "name": "UNITY (SNAPSHOT TAKEN)",
     "type": "parent",
     "ids": [
@@ -1323,20 +1273,20 @@
     "slug": "unity"
   },
   {
-    "name": "Untitled",
-    "type": "parent",
-    "ids": [
-      "152b928e97bb9e874da1bd4abdf766ae0cdc7a2f260dad5542967cb414c58489i0"
-    ],
-    "slug": "untitled"
-  },
-  {
     "name": "US - Ugly Souls by Viola MissCode",
     "type": "parent",
     "ids": [
       "905a2ad38bbdefd9bc4e333d6eeec044c6943bb8cd0ccd8373136bc8e3294376i0"
     ],
     "slug": "ugly_souls"
+  },
+  {
+    "name": "Untitled",
+    "type": "parent",
+    "ids": [
+      "152b928e97bb9e874da1bd4abdf766ae0cdc7a2f260dad5542967cb414c58489i0"
+    ],
+    "slug": "untitled"
   },
   {
     "name": "Weapon of Mass Liberation by DocT x Vivid Gallery",
@@ -1369,5 +1319,61 @@
       "0441bc243f771ab056747ead295e8a4af5230f8ceaea5afd4e066ddb0bbff238i589"
     ],
     "slug": "yunabrc"
+  },
+  {
+    "name": "boldinals",
+    "type": "parent",
+    "ids": [
+      "bc5f7ea515822472d6da34d6986e1d1fecd0df865098de79e33d913ab743eb7di0"
+    ],
+    "slug": "boldinals"
+  },
+  {
+    "name": "chatFUKR",
+    "type": "parent",
+    "ids": [
+      "d1834ae8b0c5879f3644855e84650705cccb906b7b662e0dcf49b78286cc08f0i0"
+    ],
+    "slug": "chatfukr"
+  },
+  {
+    "name": "n0 0rdinary kind",
+    "type": "parent",
+    "ids": [
+      "2f4b5b57dfb6ebb9a0174b1b7a53e33eab29198a6febbd7c34136508dedccaf5i0"
+    ],
+    "slug": "n0k"
+  },
+  {
+    "name": "ordtism",
+    "type": "parent",
+    "ids": [
+      "a820bc531524a7fac1cdbce3d909a5312b9e51ab390adbd315d14337029fd422i0"
+    ],
+    "slug": "tism"
+  },
+  {
+    "name": "skulz",
+    "type": "parent",
+    "ids": [
+      "dead91aa984e00236983a40dc63c8f356a23a95ff5fd17b58beeb157c4e47666i0"
+    ],
+    "slug": "skulz"
+  },
+  {
+    "name": "swarm_",
+    "type": "parent",
+    "ids": [
+      "0a2d171764a05531f54d2a465b8184a8c39ddbc9a7ea2e42d220e4746045ec1ei0"
+    ],
+    "slug": "swarm"
+  },
+  {
+    "name": "u-WWWave",
+    "type": "parent",
+    "ids": [
+      "b8221a2d96a93924ad494435598b080609f1735431aa7ce0348f3e7e6a7624dfi0"
+    ],
+    "slug": "u-wwwwave"
   }
 ]
