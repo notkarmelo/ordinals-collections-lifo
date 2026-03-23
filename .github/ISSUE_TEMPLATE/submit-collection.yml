@@ -45,7 +45,15 @@ body:
     id: slug
     attributes:
       label: Slug
-      description: "URL-friendly identifier. Lowercase letters, numbers, hyphens, underscores only."
+      description: "Use the exact same slug as your collection on Magic Eden or Satflow. This is the part after /ordinals/ in your collection URL (e.g. magiceden.us/ordinals/marketplace/quantum-cats → quantum-cats)."
       placeholder: "e.g. quantum-cats"
     validations:
       required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Additional Info
+      description: "Any extra context — links to your collection on marketplaces, notes about the submission, etc."
+    validations:
+      required: false
