@@ -762,6 +762,12 @@
     "slug": "metablends"
   },
   {
+    "name": "Metablocks by Billy Restey",
+    "type": "gallery",
+    "id": "cf91303c64551717cb6cb6e4f7f04a734f1166e16f7b4a2845b87cdbea8bebd4i0",
+    "slug": "metablocks"
+  },
+  {
     "name": "Mikan!",
     "type": "parent",
     "ids": [
@@ -931,6 +937,12 @@
     "type": "gallery",
     "id": "61c77de91b9068ea13377b5e5e56bf620e36e98f2fe90be17b52b2b78feb3992i0",
     "slug": "ordinalkois"
+  },
+  {
+    "name": "Ordinal Shards by Billy Restey",
+    "type": "gallery",
+    "id": "74d352c5fdaac3338f2db3e681dfe44304c756c15e62b3f39a8b97bc7d9ee811i0",
+    "slug": "ordinal-shards"
   },
   {
     "name": "Ordinal SigmaX",
@@ -1107,6 +1119,14 @@
       "4799479ecdc3f5e23904a4db240310490248aae09c1b449cc8978fb56594d8a5i0"
     ],
     "slug": "recursions"
+  },
+  {
+    "name": "Remnants of Obsidian by Billy Restey",
+    "type": "parent",
+    "ids": [
+      "64005d6b55708f1ea27e5b61fdaffcf8a38c86e55a4adb12a289a379bd5cc679i0"
+    ],
+    "slug": "remnants-obsidian"
   },
   {
     "name": "Rug Lords",
