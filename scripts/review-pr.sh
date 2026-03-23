@@ -31,7 +31,7 @@ if [[ -f "$ENV_FILE" ]]; then
 fi
 
 REPO="TheWizardsOfOrd/ordinals-collections"
-ORD_BASE="${ORD_BASE:-http://0.0.0.0}"
+ORD_BASE="${ORD_BASE:-https://charlie.ordinals.net}"
 ME_API="https://api-mainnet.magiceden.us"
 SATFLOW_API="https://api.satflow.com/v1"
 SATFLOW_KEY="${SATFLOW_API_KEY:-}"
@@ -121,6 +121,20 @@ for i, ch in enumerate(text):
 
 print(json.dumps(objects))
 " 2>/dev/null
+}
+
+get_entries_from_issue() {
+  local issue_number="$1"
+  local body
+  body=$(gh issue view "$issue_number" --repo "$REPO" --json body -q '.body' 2>/dev/null)
+  if [[ -z "$body" ]]; then
+    return 1
+  fi
+  local result
+  result=$(echo "$body" | node "${SCRIPT_DIR}/parse-issue.js" 2>/dev/null)
+  local entry
+  entry=$(echo "$result" | python3 -c "import sys,json; r=json.load(sys.stdin); e=r.get('entry'); print(json.dumps([e]) if e else '[]')" 2>/dev/null)
+  echo "$entry"
 }
 
 # Check if PR only modifies collections.json
@@ -666,25 +680,215 @@ for entry in json.load(sys.stdin):
   return 0
 }
 
+# ── Main review logic for one issue ──
+
+review_issue() {
+  local issue_number="$1"
+  local pr_ok=true
+  local has_warnings=false
+  local blocking_issues=""
+  local serious_warnings=""
+
+  header "Issue #${issue_number}"
+
+  local issue_json
+  issue_json=$(gh issue view "$issue_number" --repo "$REPO" --json title,state,author 2>/dev/null)
+  if [[ -z "$issue_json" ]]; then
+    fail "Could not fetch Issue #${issue_number}"
+    return 1
+  fi
+
+  local title state author
+  title=$(echo "$issue_json" | python3 -c "import sys,json; print(json.load(sys.stdin)['title'])")
+  state=$(echo "$issue_json" | python3 -c "import sys,json; print(json.load(sys.stdin)['state'])")
+  author=$(echo "$issue_json" | python3 -c "import sys,json; print(json.load(sys.stdin)['author']['login'])")
+
+  info "${title} (by ${author})"
+
+  if [[ "$state" != "OPEN" ]]; then
+    fail "Issue is ${state}, not OPEN"
+    return 1
+  fi
+
+  local new_entries
+  new_entries=$(get_entries_from_issue "$issue_number")
+  if [[ -z "$new_entries" || "$new_entries" == "[]" ]]; then
+    fail "Could not parse collection entry from issue body"
+    return 1
+  fi
+
+  local entry_count
+  entry_count=$(echo "$new_entries" | python3 -c "import sys,json; print(len(json.load(sys.stdin)))")
+  info "Found ${entry_count} collection entry"
+
+  # Run the same validation loop as review_pr
+  while IFS=$'\t' read -r slug name entry_type entry_id entry_ids; do
+    [[ "$entry_id" == "-" ]] && entry_id=""
+    [[ "$entry_ids" == "-" ]] && entry_ids=""
+    echo ""
+    echo -e "  ${BOLD}${slug}${RESET} — \"${name}\" (${entry_type})"
+    if [[ "$entry_type" == "gallery" ]]; then
+      info "id: ${ORD_BASE}/inscription/${entry_id}"
+    elif [[ "$entry_type" == "parent" ]]; then
+      IFS=',' read -ra _pids <<< "$entry_ids"
+      for _pid in "${_pids[@]}"; do
+        info "parent: ${ORD_BASE}/inscription/${_pid}"
+      done
+    fi
+
+    # Check inscription on local ord
+    local gallery_count=0
+    if [[ "$entry_type" == "gallery" ]]; then
+      local ord_data
+      ord_data=$(check_ord "$entry_id")
+      if [[ -z "$ord_data" ]]; then
+        fail "Inscription ${entry_id:0:16}... not found on ord"
+      else
+        gallery_count=$(echo "$ord_data" | python3 -c "
+import sys,json
+d=json.load(sys.stdin)
+g=d.get('properties',{}).get('gallery',[])
+print(len(g) if isinstance(g,list) else 0)
+" 2>/dev/null)
+        if [[ "$gallery_count" -gt 0 ]]; then
+          pass "Valid gallery inscription on chain (${gallery_count} items)"
+        else
+          fail "Inscription exists but has no gallery property"
+        fi
+      fi
+    elif [[ "$entry_type" == "parent" ]]; then
+      IFS=',' read -ra parent_ids <<< "$entry_ids"
+      for pid in "${parent_ids[@]}"; do
+        local ord_data
+        ord_data=$(check_ord "$pid")
+        if [[ -z "$ord_data" ]]; then
+          fail "Parent ${pid:0:16}... not found on ord"
+        else
+          local child_count
+          child_count=$(echo "$ord_data" | python3 -c "import sys,json; print(json.load(sys.stdin).get('child_count',0))" 2>/dev/null)
+          if [[ "$child_count" -gt 0 ]]; then
+            pass "Parent ${pid:0:16}... has ${child_count} children"
+          else
+            warn "Parent ${pid:0:16}... has 0 children on ord"
+          fi
+        fi
+      done
+    fi
+
+    # Check ME
+    local me_data
+    if me_data=$(check_me "$slug"); then
+      local me_name me_supply
+      me_name=$(echo "$me_data" | python3 -c "import sys,json; print(json.load(sys.stdin)['name'])")
+      me_supply=$(echo "$me_data" | python3 -c "import sys,json; print(json.load(sys.stdin).get('supply','?'))")
+      pass "Found on ME: \"${me_name}\" (${me_supply} items)"
+
+      if [[ "$me_name" != "$name" ]]; then
+        warn "Name mismatch: submitted=\"${name}\" vs ME=\"${me_name}\""
+      fi
+
+      if [[ "$entry_type" == "gallery" && "$gallery_count" -gt 0 && "$me_supply" != "?" ]]; then
+        if [[ "$gallery_count" -gt "$me_supply" ]]; then
+          local extra=$(( gallery_count - me_supply ))
+          warn "Gallery has ${gallery_count} items but ME supply is ${me_supply} (${extra} extra items)"
+          has_warnings=true
+          serious_warnings="${serious_warnings}\n  - Gallery has ${extra} more items than ME supply"
+        elif [[ "$gallery_count" -lt "$me_supply" ]]; then
+          local missing=$(( me_supply - gallery_count ))
+          warn "Gallery has ${gallery_count} items but ME supply is ${me_supply} (${missing} missing)"
+          has_warnings=true
+          serious_warnings="${serious_warnings}\n  - Gallery is missing ${missing} items vs ME supply"
+        fi
+      fi
+
+      if [[ "$entry_type" == "gallery" ]]; then
+        spot_check_gallery "$entry_id" "$slug"
+      fi
+    else
+      info "Not found on ME"
+    fi
+
+    # Check Satflow
+    local sf_data
+    if sf_data=$(check_satflow "$slug"); then
+      local sf_name sf_supply
+      sf_name=$(echo "$sf_data" | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['collection'][0]['name'])")
+      sf_supply=$(echo "$sf_data" | python3 -c "import sys,json; print(json.load(sys.stdin)['data']['collection'][0].get('total_items','?'))")
+      pass "Found on Satflow: \"${sf_name}\" (${sf_supply} items)"
+
+      if [[ "$sf_name" != "$name" ]]; then
+        warn "Name mismatch: submitted=\"${name}\" vs Satflow=\"${sf_name}\""
+      fi
+    else
+      info "Not found on Satflow"
+    fi
+
+    # Check legacy
+    if check_legacy "$slug"; then
+      info "Exists in legacy collections (migrating to new format)"
+      local legacy_output
+      legacy_output=$(verify_legacy "$slug" "$entry_type" "$entry_id" "$entry_ids")
+      while IFS='|' read -r level msg; do
+        _print_legacy_result "$level" "$msg"
+        if [[ "$level" == "WARN" || "$level" == "FAIL" ]]; then
+          has_warnings=true
+          serious_warnings="${serious_warnings}\n  - ${msg}"
+        fi
+      done <<< "$legacy_output"
+    fi
+  done < <(echo "$new_entries" | python3 -c "
+import sys, json
+for entry in json.load(sys.stdin):
+    slug = entry.get('slug', '')
+    name = entry.get('name', '')
+    entry_type = entry.get('type', '')
+    entry_id = entry.get('id', '-')
+    entry_ids = ','.join(entry.get('ids', [])) or '-'
+    print(f'{slug}\t{name}\t{entry_type}\t{entry_id}\t{entry_ids}')
+")
+
+  echo ""
+
+  if [[ "$pr_ok" == false ]]; then
+    echo -e "  ${RED}${BOLD}BLOCKED${RESET} — cannot merge:${blocking_issues}"
+    return 1
+  fi
+
+  if [[ "$has_warnings" == true ]]; then
+    echo -e "  ${YELLOW}${BOLD}WARNINGS${RESET} — review carefully before merging:${serious_warnings}"
+    return 2
+  fi
+
+  return 0
+}
+
 # ── Entry point ──
 
+MODE="pr"
+if [[ "${1:-}" == "--issue" ]]; then
+  MODE="issue"
+  shift
+fi
+
 if [[ $# -eq 0 ]]; then
-  echo "Usage: $0 <PR number or URL> [<PR> ...]"
-  echo "Example: $0 13 14 https://github.com/TheWizardsOfOrd/ordinals-collections/pull/15"
+  echo "Usage: $0 [--issue] <number or URL> [<number> ...]"
+  echo "Examples:"
+  echo "  $0 13 14                    # review PRs"
+  echo "  $0 --issue 42 43            # review issues"
   exit 1
 fi
 
 # Verify prerequisites
-for cmd in gh curl python3; do
+for cmd in gh curl python3 node; do
   if ! command -v "$cmd" &>/dev/null; then
     echo "Error: ${cmd} is required but not installed."
     exit 1
   fi
 done
 
-# Check local ord is reachable
+# Check ord is reachable
 if ! curl -sf "${ORD_BASE}/status" -H 'Accept: application/json' &>/dev/null; then
-  echo -e "${YELLOW}Warning: Local ord at ${ORD_BASE} is not reachable. Inscription checks will fail.${RESET}"
+  echo -e "${YELLOW}Warning: ord at ${ORD_BASE} is not reachable. Inscription checks will fail.${RESET}"
 fi
 
 # Check Satflow API key
@@ -693,84 +897,108 @@ if [[ -z "$SATFLOW_KEY" ]]; then
   echo -e "${DIM}Set it in .env or export SATFLOW_API_KEY=...${RESET}"
 fi
 
-pr_numbers=()
+numbers=()
 for arg in "$@"; do
-  pr_num=$(parse_pr_number "$arg")
-  if [[ -z "$pr_num" ]]; then
-    echo "Error: Could not parse PR number from '${arg}'"
+  num=$(parse_pr_number "$arg")
+  if [[ -z "$num" ]]; then
+    echo "Error: Could not parse number from '${arg}'"
     exit 1
   fi
-  pr_numbers+=("$pr_num")
+  numbers+=("$num")
 done
 
-echo -e "${BOLD}Reviewing ${#pr_numbers[@]} PR(s) for ${REPO}${RESET}"
+label=$([[ "$MODE" == "issue" ]] && echo "issue(s)" || echo "PR(s)")
+echo -e "${BOLD}Reviewing ${#numbers[@]} ${label} for ${REPO}${RESET}"
 
-declare -A pr_status  # "ok" or "warnings"
-mergeable_prs=()
-for pr_num in "${pr_numbers[@]}"; do
+declare -A item_status
+mergeable=()
+for num in "${numbers[@]}"; do
   rc=0
-  review_pr "$pr_num" || rc=$?
+  if [[ "$MODE" == "issue" ]]; then
+    review_issue "$num" || rc=$?
+  else
+    review_pr "$num" || rc=$?
+  fi
   if [[ $rc -eq 0 ]]; then
-    mergeable_prs+=("$pr_num")
-    pr_status[$pr_num]="ok"
+    mergeable+=("$num")
+    item_status[$num]="ok"
   elif [[ $rc -eq 2 ]]; then
-    mergeable_prs+=("$pr_num")
-    pr_status[$pr_num]="warnings"
+    mergeable+=("$num")
+    item_status[$num]="warnings"
   fi
 done
 
 echo ""
 echo -e "${BOLD}═══════════════════════════════════${RESET}"
 
-if [[ ${#mergeable_prs[@]} -eq 0 ]]; then
-  echo -e "${RED}No PRs are eligible for merging.${RESET}"
+if [[ ${#mergeable[@]} -eq 0 ]]; then
+  echo -e "${RED}No ${label} eligible for merging.${RESET}"
   exit 1
 fi
 
-echo -e "${GREEN}${#mergeable_prs[@]} PR(s) eligible for merging: ${mergeable_prs[*]}${RESET}"
+echo -e "${GREEN}${#mergeable[@]} ${label} eligible for merging: ${mergeable[*]}${RESET}"
 echo ""
 
-for pr_num in "${mergeable_prs[@]}"; do
-  local_title=$(gh pr view "$pr_num" --repo "$REPO" --json title -q '.title' 2>/dev/null)
-  local_entries=$(get_new_entries "$pr_num")
+for num in "${mergeable[@]}"; do
+  local_entries=""
+  local_title=""
+  if [[ "$MODE" == "issue" ]]; then
+    local_title=$(gh issue view "$num" --repo "$REPO" --json title -q '.title' 2>/dev/null)
+    local_entries=$(get_entries_from_issue "$num")
+  else
+    local_title=$(gh pr view "$num" --repo "$REPO" --json title -q '.title' 2>/dev/null)
+    local_entries=$(get_new_entries "$num")
+  fi
   local_slugs=$(echo "$local_entries" | python3 -c "import sys,json; print(', '.join(e['slug'] for e in json.load(sys.stdin)))" 2>/dev/null)
 
-  if [[ "${pr_status[$pr_num]}" == "warnings" ]]; then
-    echo -e "${YELLOW}PR #${pr_num} has warnings!${RESET}"
-    echo -ne "Action for PR #${pr_num} (${local_title})? [m]erge / [c]omment / [s]kip: "
-  else
-    echo -ne "Action for PR #${pr_num} (${local_title})? [m]erge / [c]omment / [s]kip: "
+  local tag=$([[ "$MODE" == "issue" ]] && echo "Issue" || echo "PR")
+
+  if [[ "${item_status[$num]}" == "warnings" ]]; then
+    echo -e "${YELLOW}${tag} #${num} has warnings!${RESET}"
   fi
+  echo -ne "Action for ${tag} #${num} (${local_title})? [m]erge / [c]omment / [s]kip: "
   read -r answer
 
   case "$answer" in
     m|M)
-      echo -n "Applying collections.json entries from PR #${pr_num}... "
-      commit_msg="Add ${local_slugs} (PR #${pr_num})"
+      echo -n "Applying collections.json entries from ${tag} #${num}... "
+      local ref_tag=$([[ "$MODE" == "issue" ]] && echo "issue" || echo "PR")
+      commit_msg="Add ${local_slugs} (${ref_tag} #${num})"
       commit_url=""
-      if commit_url=$(apply_collection_entries "$pr_num" "$local_entries" "$commit_msg"); then
+      if commit_url=$(apply_collection_entries "$num" "$local_entries" "$commit_msg"); then
         echo -e "${GREEN}done${RESET}"
         info "${commit_url}"
-        gh pr close "$pr_num" --repo "$REPO" \
-          --comment "Merged collections.json entries via [${commit_msg}](${commit_url}). Non-data file changes were excluded." \
-          > /dev/null 2>&1
-        info "PR #${pr_num} closed — https://github.com/${REPO}/pull/${pr_num}"
+        if [[ "$MODE" == "issue" ]]; then
+          gh issue close "$num" --repo "$REPO" \
+            --comment "Added via [${commit_msg}](${commit_url})" \
+            > /dev/null 2>&1
+          info "Issue #${num} closed — https://github.com/${REPO}/issues/${num}"
+        else
+          gh pr close "$num" --repo "$REPO" \
+            --comment "Merged collections.json entries via [${commit_msg}](${commit_url}). Non-data file changes were excluded." \
+            > /dev/null 2>&1
+          info "PR #${num} closed — https://github.com/${REPO}/pull/${num}"
+        fi
       else
         echo -e "${RED}failed${RESET}"
       fi
       ;;
     c|C)
-      echo -ne "Enter comment for PR #${pr_num}: "
+      echo -ne "Enter comment for ${tag} #${num}: "
       read -r comment_text
       if [[ -n "$comment_text" ]]; then
-        gh pr comment "$pr_num" --repo "$REPO" --body "$comment_text" > /dev/null 2>&1
-        echo -e "${GREEN}Comment posted on PR #${pr_num}${RESET}"
+        if [[ "$MODE" == "issue" ]]; then
+          gh issue comment "$num" --repo "$REPO" --body "$comment_text" > /dev/null 2>&1
+        else
+          gh pr comment "$num" --repo "$REPO" --body "$comment_text" > /dev/null 2>&1
+        fi
+        echo -e "${GREEN}Comment posted on ${tag} #${num}${RESET}"
       else
         echo "No comment entered, skipping."
       fi
       ;;
     *)
-      echo "Skipped PR #${pr_num}"
+      echo "Skipped ${tag} #${num}"
       ;;
   esac
 done

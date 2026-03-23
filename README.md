@@ -32,12 +32,7 @@ Each entry includes:
 
 ### Submitting a Collection
 
-1. Add your entry to [`collections.json`](collections.json)
-2. Run `node scripts/format-collections.js` to sort and trim whitespace
-3. Run `node scripts/validate-collections.js` to validate
-4. Open a PR
-
-CI will automatically validate your entry on push.
+[**Open an issue**](../../issues/new?template=submit-collection.yml) with your collection details. Fill out the form and CI will automatically validate your submission. A maintainer will review and merge it.
 
 ### Inclusion Criteria
 

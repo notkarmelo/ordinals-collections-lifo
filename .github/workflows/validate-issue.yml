@@ -1,0 +1,84 @@
+name: Validate collection submission
+
+on:
+  issues:
+    types: [opened, edited]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  validate:
+    if: contains(github.event.issue.labels.*.name, 'submission')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Parse and validate
+        id: parse
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        run: |
+          RESULT=$(echo "$ISSUE_BODY" | node scripts/parse-issue.js)
+          echo "result<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$RESULT" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+      - name: Post validation comment
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const result = ${{ steps.parse.outputs.result }};
+            const errors = result.errors || [];
+            const entry = result.entry;
+
+            let body;
+            if (errors.length > 0) {
+              body = [
+                '## :x: Validation Failed',
+                '',
+                ...errors.map(e => `- ${e}`),
+                '',
+                'Please edit the issue to fix these errors.',
+              ].join('\n');
+            } else {
+              body = [
+                '## :white_check_mark: Validation Passed',
+                '',
+                '```json',
+                JSON.stringify(entry, null, 2),
+                '```',
+                '',
+                'A maintainer will review and approve this submission.',
+              ].join('\n');
+            }
+
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            const existing = comments.find(c =>
+              c.user.type === 'Bot' &&
+              (c.body.includes('Validation Passed') || c.body.includes('Validation Failed'))
+            );
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body,
+              });
+            }

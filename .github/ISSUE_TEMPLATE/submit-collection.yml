@@ -1,0 +1,51 @@
+name: Submit Collection
+description: Add a new collection to ordinals-collections
+title: "Add collection: "
+labels: ["submission"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Submit your collection by filling out the fields below.
+        One collection per issue. Open multiple issues for multiple collections.
+
+  - type: input
+    id: name
+    attributes:
+      label: Collection Name
+      placeholder: "e.g. Quantum Cats"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Collection Type
+      description: |
+        **Gallery**: items are listed inside a single gallery inscription.
+        **Parent**: items are child inscriptions of one or more parent inscription(s).
+      options:
+        - gallery
+        - parent
+    validations:
+      required: true
+
+  - type: textarea
+    id: inscription_ids
+    attributes:
+      label: Inscription ID(s)
+      description: |
+        Gallery: a single gallery inscription ID.
+        Parent: one parent inscription ID per line.
+      placeholder: "e.g. 0e383b8af3e7f8767bc9ec0a48fbf837d82b0d537f4dbc7a8853e6828112ea41i0"
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: Slug
+      description: "URL-friendly identifier. Lowercase letters, numbers, hyphens, underscores only."
+      placeholder: "e.g. quantum-cats"
+    validations:
+      required: true
