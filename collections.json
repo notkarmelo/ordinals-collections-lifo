@@ -1259,6 +1259,14 @@
     "slug": "stepepes"
   },
   {
+    "name": "Supercycle",
+    "type": "parent",
+    "ids": [
+      "95369abf48f218b1ee091140b6d4b5ff1a9579cf4839d24d7024328f10adda56i0"
+    ],
+    "slug": "supercycle"
+  },
+  {
     "name": "swarm_",
     "type": "parent",
     "ids": [
