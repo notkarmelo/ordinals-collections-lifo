@@ -125,13 +125,16 @@ print(json.dumps(objects))
 
 get_entries_from_issue() {
   local issue_number="$1"
-  local body
-  body=$(gh issue view "$issue_number" --repo "$REPO" --json body -q '.body' 2>/dev/null)
-  if [[ -z "$body" ]]; then
+  local issue_json
+  issue_json=$(gh issue view "$issue_number" --repo "$REPO" --json body,title 2>/dev/null)
+  if [[ -z "$issue_json" ]]; then
     return 1
   fi
+  local body title
+  body=$(echo "$issue_json" | python3 -c "import sys,json; print(json.load(sys.stdin)['body'])")
+  title=$(echo "$issue_json" | python3 -c "import sys,json; print(json.load(sys.stdin)['title'])")
   local result
-  result=$(echo "$body" | node "${SCRIPT_DIR}/parse-issue.js" 2>/dev/null)
+  result=$(echo "$body" | ISSUE_TITLE="$title" node "${SCRIPT_DIR}/parse-issue.js" 2>/dev/null)
   local entry
   entry=$(echo "$result" | python3 -c "import sys,json; r=json.load(sys.stdin); e=r.get('entry'); print(json.dumps([e]) if e else '[]')" 2>/dev/null)
   echo "$entry"

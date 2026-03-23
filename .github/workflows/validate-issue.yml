@@ -23,6 +23,7 @@ jobs:
         id: parse
         env:
           ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
         run: |
           RESULT=$(echo "$ISSUE_BODY" | node scripts/parse-issue.js)
           echo "result<<EOF" >> "$GITHUB_OUTPUT"

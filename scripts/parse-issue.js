@@ -29,7 +29,7 @@ for (const key of Object.keys(sections)) {
   sections[key] = sections[key].trim()
 }
 
-const name = sections['Collection Name'] || ''
+const name = process.env.ISSUE_TITLE || sections['Collection Name'] || ''
 const type = sections['Collection Type'] || ''
 const rawIds = sections['Inscription ID(s)'] || ''
 const slug = sections['Slug'] || ''
