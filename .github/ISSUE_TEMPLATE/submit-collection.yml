@@ -5,9 +5,7 @@ labels: ["submission"]
 body:
   - type: markdown
     attributes:
-      value: |
-        Submit your collection by filling out the fields below.
-        One collection per issue. Open multiple issues for multiple collections.
+      value: One collection per issue. Open multiple issues for multiple collections.
 
   - type: input
     id: name
