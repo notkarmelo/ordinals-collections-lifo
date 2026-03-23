@@ -1,6 +1,5 @@
 name: Submit Collection
 description: Add a new collection to ordinals-collections
-title: "Add collection: "
 labels: ["submission"]
 body:
   - type: markdown
