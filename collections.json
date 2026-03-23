@@ -350,6 +350,14 @@
     "slug": "cents"
   },
   {
+    "name": "Chaos Guild by Karmelo",
+    "type": "parent",
+    "ids": [
+      "00000866637d580f4e24dcd945314e1ffb5aacdf2df878f64b9a6375f115ba55i0"
+    ],
+    "slug": "chaosguild"
+  },
+  {
     "name": "chatFUKR",
     "type": "parent",
     "ids": [
@@ -626,6 +634,14 @@
     "slug": "idontwanttodie"
   },
   {
+    "name": "ICONZ",
+    "type": "parent",
+    "ids": [
+      "8d9e87236b85da79f06aca1a46017f39e2d2c4de66636732c388eedb0aeb1c7di0"
+    ],
+    "slug": "iconz"
+  },
+  {
     "name": "IDIOTS",
     "type": "parent",
     "ids": [
@@ -672,6 +688,12 @@
       "fd85f101314c737757ebe59b5d76c4e093365e3f6b214a5498db6662b0a7fca1i0"
     ],
     "slug": "jeetsonbtc"
+  },
+  {
+    "name": "Karmz",
+    "type": "gallery",
+    "id": "6624f5eaf9fd051fe9ea048134d5ae135fc2c2ca7c4e95de1e584eaebb707b18i0",
+    "slug": "karmz"
   },
   {
     "name": "Kyogen",
@@ -1227,6 +1249,22 @@
     "slug": "sketchbook"
   },
   {
+    "name": "Skullbros by Karmelo",
+    "type": "parent",
+    "ids": [
+      "e56091a8e0276f8faec19ee909d34bf7151fc2d3eb2219d6cb87e45fab8e6782i0"
+    ],
+    "slug": "skullbros"
+  },
+  {
+    "name": "Skullminati",
+    "type": "parent",
+    "ids": [
+      "77b977d42f6083860175abca5002256da4f6b08b3b6729e673a78aac36b8c9e0i0"
+    ],
+    "slug": "skullminati"
+  },
+  {
     "name": "Skullx: Cursed Raiders",
     "type": "gallery",
     "id": "6666668241de5ea5d4b290ebb467a855de68df3c5e3e927f14b045214c128298i1",
@@ -1265,20 +1303,12 @@
     "slug": "skullx_artist_series"
   },
   {
-    "name": "skulz",
+    "name": "skulz by Karmelo",
     "type": "parent",
     "ids": [
       "dead91aa984e00236983a40dc63c8f356a23a95ff5fd17b58beeb157c4e47666i0"
     ],
     "slug": "skulz"
-  },
-  {
-    "name": "Skulz Chaos Guild",
-    "type": "parent",
-    "ids": [
-      "00000866637d580f4e24dcd945314e1ffb5aacdf2df878f64b9a6375f115ba55i0"
-    ],
-    "slug": "chaosguild"
   },
   {
     "name": "Sparks",
@@ -1465,6 +1495,12 @@
       "b8221a2d96a93924ad494435598b080609f1735431aa7ce0348f3e7e6a7624dfi0"
     ],
     "slug": "u-wwwwave"
+  },
+  {
+    "name": "UFBros by Karmelo",
+    "type": "gallery",
+    "id": "9a89ee818235e33cae03525cba18e58d5c41400b325137bd0ce2016748b5d8ebi0",
+    "slug": "ufbros"
   },
   {
     "name": "UNITY (SNAPSHOT TAKEN)",
